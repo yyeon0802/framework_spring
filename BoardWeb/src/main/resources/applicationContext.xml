@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<!-- 컴포넌트 어노테이션 : bean없이 bean처럼 -->
+	<context:component-scan base-package="polymorphism"></context:component-scan>
+	<bean class="polymorphism.SonySpeaker"></bean>
+	
+	<!-- property를 제외하고 p 네임스페이스 추가 -->
+	<!-- <bean id="tv" class="polymorphism.SamsungTV" p:speaker-ref="sony" p:price="2700000"> -->
+	
+	<!-- init-method="initMethod" destroy-method="destroyMethod" -->
+		<!-- <constructor-arg index="0" ref="apple"></constructor-arg>  SonySpeaker를 매개변수로 갖는 생성자를 호출하겠다 -->
+		<!--  <constructor-arg index="1" value="2700000"></constructor-arg> -->
+		<!--  두개의 매개변수를 갖는 생성자를 호출하겠다
+			* index로 mapping  즉, 생성자에 매개변수가 들어가는 순서대로 index를 매핑해주어야 한다. 들어가는 순서가 바뀌면 error -->
+			
+		<!--  setter injection --> 
+		<!-- <property name="speaker" ref="apple"></property>	
+		<property name="price" value="2700000"></property>-->		
+		<!--  constructor는 index였지만, property는 name으로 mapping 된다. -->		
+			
+	<!--  </bean> -->
+	
+	<!-- 
+		* init-method / destroy-method
+		* lazy-init="true or false" => 컨테이너가 로딩되는 즉시 로딩(계속 객체 생성), 메모리 관리 측면에서 사용: 그러나 시스템에 부담을 주는경우도 있다.
+		* scope="singleton" / "prototype"
+		   => 	"singleton" => 객체를 3번 생성해도, singleton으로 객체를 한번만 생성하여 쓴다
+		  		"prototype" => 객체 3번 생성하면 한개씩 전부 생성		
+	 -->
+	
+	<!-- dependency Injection 의존성 주입 : 스프링 설정파일에 등록된 정보(bean)를 컨테이너가 자동으로 처리한다. 			
+	-->
+	<!-- 생성자 주입을 위한 bean생성 -->
+	<!-- <bean id="sony" class="polymorphism.SonySpeaker"></bean> -->
+	<!-- <bean id="apple" class="polymorphism.AppleSpeaker"></bean> -->
+	
+	<!-- list -> set -->
+	<!-- set -> map entry-->
+
+	
+	<!-- 중복된 개체를 자동으로 삭제해주는 집합개체 set -->
+	<!-- <bean id="collectionBean" class="com.springbook.ioc.injection.CollectionBean">
+		<property name="addressList">
+			<props>
+				<value>서울시 강남구 역삼동</value>  
+				 	<value>서울시 성동구 성수동</value> 
+				  	<value>서울시 성동구 성수동</value>
+				
+				<entry>
+					<key><value>고길동</value></key>
+					<value>서울시 강남구 역삼동</value>
+				</entry>				
+				<entry>
+					<key><value>마이콜</value></key>
+					<value>서울시 강서구 희곡동</value>
+				</entry>
+				
+				<prop key="고길동">서울시 강남구 역삼동</prop>
+				<prop key="마이콜">서울시 강서구 화곡동</prop>
+				
+			</props>
+		</property>
+	
+	</bean> -->
+		  
+	<!--<bean class="polymorphism.SamsungTV"></bean>-->
+	<!--<bean class="polymorphism.LgTV"></bean>-->
+	<!-- <bean id="samsungTv" class="polymorphism.SamsungTV"></bean>  -->
+	<!-- <bean id="lgTv" class="polymorphism.LgTV"></bean>  -->
+	
+	
+	
+	
+</beans>
