@@ -3,14 +3,59 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	
 	xmlns:p="http://www.springframework.org/schema/p" 
 	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	
+	<context:component-scan base-package="com.springbook.biz"></context:component-scan>
+	
+	<!-- <bean id="log" class="com.springbook.biz.common.LogAdvice"></bean>  -->
+	<!-- <bean id="before" class="com.springbook.biz.common.BeforeAdvice"></bean>  -->
+	<!-- <bean id="afterReturning" class="com.springbook.biz.common.AfterReturningAdvice"></bean> -->
+	<bean id="afterThrowing" class="com.springbook.biz.common.AfterThrowingAdvice"></bean> 
+	<bean id="after" class="com.springbook.biz.common.AfterAdvice"></bean> 
+	<bean id="around" class="com.springbook.biz.common.AroundAdvice"></bean>
 
+	<aop:config>
+		<!--returntype / package경로 / class명:*Impl(Impl로 끝나는 모든 클래스)/ method * : 모든 메소드/ (..) 매개변수 : 모든 매개변수  -->
+		<aop:pointcut id="allPointcut" expression="execution(* com.springbook.biz..*Impl.*(..))"/>
+		<aop:pointcut id="getPointcut" expression="execution(* com.springbook.biz..*Impl.get*(..))"/>
+		
+		<!-- <aop:aspect ref="log"> -->
+		<!-- <aop:aspect ref="before"> -->
+		<!-- <aop:aspect ref="afterReturning"> -->
+		<aop:aspect ref="around">
+			<!-- <aop:before(after=>시점) pointcut-ref="allPointcut" method="printLog"/> -->
+			<!-- <aop:before pointcut-ref="getPointcut" method="printLog"/> -->
+			<!-- <aop:after pointcut-ref="allPointcut" method="beforeLog"/> -->
+			<!-- <aop:after-returning pointcut-ref="getPointcut" method="afterLog"/> -->
+			<aop:around pointcut-ref="allPointcut" method="aroundLog"/>
+ 		</aop:aspect> 
+		
+		<!-- <aop:aspect ref="afterThrowing"> 
+			 <aop:after-throwing pointcut-ref="allPointcut" method="exceptionLog"/> 
+		</aop:aspect> -->
+		 <!-- <aop:aspect ref="after"> 
+			 <aop:after pointcut-ref="allPointcut" method="finallyLog"/> 
+		</aop:aspect> -->
+		
+	</aop:config>
+	
+	<!-- 1. bean 사용 방법 => property를 이용하여 userDAO 의존성 주입 serviceimpl에서 자동으로 할당 -->
+	<!-- <bean id="userService" class="com.springbook.biz.user.impl.UserServiceImpl">
+		<property name="userDAO" ref="userDAO"></property> 
+	</bean>
+	<bean id="userDAO" class="com.springbook.biz.user.impl.UserDAO"></bean> -->
+	<!-- 이부분을 주석처리하면 annotation 방법으로 사용 -->
+	
+	
 	<!-- 컴포넌트 어노테이션 : bean없이 bean처럼 -->
-	<context:component-scan base-package="polymorphism"></context:component-scan>
-	<bean class="polymorphism.SonySpeaker"></bean>
+	<!-- <context:component-scan base-package="polymorphism"></context:component-scan>
+	<bean class="polymorphism.SonySpeaker"></bean> -->
 	
 	<!-- property를 제외하고 p 네임스페이스 추가 -->
 	<!-- <bean id="tv" class="polymorphism.SamsungTV" p:speaker-ref="sony" p:price="2700000"> -->
@@ -75,8 +120,5 @@
 	<!--<bean class="polymorphism.LgTV"></bean>-->
 	<!-- <bean id="samsungTv" class="polymorphism.SamsungTV"></bean>  -->
 	<!-- <bean id="lgTv" class="polymorphism.LgTV"></bean>  -->
-	
-	
-	
-	
+			
 </beans>
