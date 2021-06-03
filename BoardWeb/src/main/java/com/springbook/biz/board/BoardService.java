@@ -9,17 +9,17 @@ public interface BoardService {
 	// CRUD 기능의 메소드 구현
 	
 	// 글등록
-	void insertBaord(BoardVO vo);
+	void insertBoard(BoardVO vo);
 	
 	// 글수정
-	void updateBaord(BoardVO vo);
+	void updateBoard(BoardVO vo);
 	
 	// 글삭제
-	void deleteBaord(BoardVO vo);
+	void deleteBoard(BoardVO vo);
 	
 	// 글 상세 조회
 	BoardVO getBoard(BoardVO vo);
 	
 	// 글 목록 조회
-	List<BoardVO> getBaordList(BoardVO vo);
+	List<BoardVO> getBoardList(BoardVO vo);
 }

@@ -22,7 +22,7 @@ public class BoardServiceImpl implements BoardService {		//상속받은 인터페이스로
 	 * public BoardServiceImpl() { log = new Log4jAdvice(); }
 	 */
 		
-	public void insertBaord(BoardVO vo) {
+	public void insertBoard(BoardVO vo) {
 //		log.printLogging();
 		
 
@@ -35,12 +35,12 @@ public class BoardServiceImpl implements BoardService {		//상속받은 인터페이스로
 		boardDAO.insertBoard(vo);
 	}
 
-	public void updateBaord(BoardVO vo) {
+	public void updateBoard(BoardVO vo) {
 //		log.printLogging();
 		boardDAO.updateBoard(vo);
 	}
 
-	public void deleteBaord(BoardVO vo) {
+	public void deleteBoard(BoardVO vo) {
 //		log.printLogging();
 		boardDAO.deleteBoard(vo);
 	}
@@ -50,7 +50,7 @@ public class BoardServiceImpl implements BoardService {		//상속받은 인터페이스로
 		return boardDAO.getBoard(vo);
 	}
 
-	public List<BoardVO> getBaordList(BoardVO vo) {
+	public List<BoardVO> getBoardList(BoardVO vo) {
 //		log.printLogging();
 		return boardDAO.getBoardList(vo);
 	}
