@@ -13,7 +13,8 @@ import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.common.JDBCUtil;
 
 //DAO(Data Access Object)
-@Repository("boardDAO") //Repository : component보다 데이터처리에 효율적(why? 예외처리포함)
+//BoardDAOSpring(spring Template) 사용하려면 중복을 없애야한다.
+//@Repository("boardDAO") //Repository : component보다 데이터처리에 효율적(why? 예외처리포함)
 public class BoardDAO {
 
 	//JDBC 변수
