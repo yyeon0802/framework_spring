@@ -40,6 +40,8 @@ public class BoardDAOSpring { //extends JdbcDaoSupport : bean사용시에는 getTempl
    @Autowired
    private JdbcTemplate jdbcTemplate;   
    
+   
+    /*getJdbcTemplate().*/
    //CRUD 기능의 메소드 구현
    //글 등록
    public void insertBoard(BoardVO vo) {

@@ -19,6 +19,6 @@ public class UserServiceImpl implements UserService {
 
 	//userService interface override
 	public UserVO getUser(UserVO vo) {
-		return userDAO.getUSer(vo);
+		return userDAO.getUser(vo);
 	}
 }

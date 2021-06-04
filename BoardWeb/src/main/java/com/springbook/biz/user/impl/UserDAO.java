@@ -24,7 +24,7 @@ public class UserDAO {
 	
 	//CRUD 기능의 메소드 구현
 	// 회원등록
-	public UserVO getUSer(UserVO vo) {
+	public UserVO getUser(UserVO vo) {
 		UserVO user = null;
 		try {
 			System.out.println("===> JDBC로  getUser() 기능 처리");

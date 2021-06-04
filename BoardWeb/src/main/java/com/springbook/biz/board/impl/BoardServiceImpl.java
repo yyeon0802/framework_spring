@@ -32,7 +32,7 @@ public class BoardServiceImpl implements BoardService {      //상속받은 인터페이
       boardDAO.insertBoard(vo);      // 100번 글 등록 성공
       
 //      [transaction test]
-//      boardDAO.insertBoard(vo);      // Exception 발생 (동일한 seq가 두번 들어가기에 commit이 실행 xx rollback 실행 oo
+//      boardDAO.insertBoard(vo);      // 2번실행하여 Exception 발생 (동일한 seq가 두번 들어가기에 commit이 실행 xx rollback 실행 oo)
       
    }
 
