@@ -13,6 +13,8 @@
    // 세션에 저장된 글 목록을 꺼낸다.
    // List<BoardVO> boardList = (List)session.getAttribute("boardList");
    
+   // jstl => c:user -> repository -> javax -> servlet -> jstl 1.2.jar -> tomcat설치 folder -> lib -> ctrl c+v
+   
 %>
 
 <!-- 3. 응답 화면 구성 -->
