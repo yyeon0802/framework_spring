@@ -1,4 +1,4 @@
-package com.springbook.view.board;
+/*package com.springbook.view.board;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,23 +15,36 @@ import org.springframework.web.bind.annotation.RequestMapping; //doPost의 직접적
  *  InsertBoardController가 가지고 있는 insertBoard()메소드를 실행 -> 
  *  이때 매개변수에 해당하는 BoardVO객체를 스프링컨테이너가 생성하여 전달*/
 
-@Controller //container 객체 자동생성
-public class InsertBoardController  { // implements Controller
-
+//@Controller //container 객체 자동생성
+//public class InsertBoardController  { // implements Controller
+		
+	//FINAL : annotation ver.
+	
 	//@Override -> 상속 받은 것이 아니라 삭제
 	
 	// 아래의 설정은, 클라이언트로부터 "/insertBoard.do"라는 요청이 올때 insertBoard() 라는 method를 mapping하겠다는 설정.
 	//객체가 아닌 doPost의 직접적인 method(= insertBoard() )를 ! mapping / value 생략가능(대부분 생략)
-	@RequestMapping(value="/insertBoard.do") 
-	public void  insertBoard(BoardVO vo) {
+	//@RequestMapping(value="/insertBoard.do") 
+	//public String  insertBoard(BoardVO vo, BoardDAO boardDAO) { 
+		
+		//annotation ver. 매개변수 BoardDAO boardDAO 추가 -> void => String 수정
+		
 		//ModelAndView -> void로 변경 / 메소드명 handleRequest 변경 -> insertBoard
 	
 		// 매개변수 HttpServletResponse response 삭제
 		// HttpServletRequest request 매개변수로 받지 말고 바로 BoardVO를 받아 command객체 사용
 		
-		System.out.println("글 등록 처리");
+		//System.out.println("글 등록 처리");
 		
-			
+		//boardDAO.insertBoard(vo);
+		//return "getBoardList.do";
+		
+		//view 경로를 리턴하면 기본적으로 포워딩 방식이므로, 리다이렉트를 원할때는 redirect접두사를 붙여 넘겨야 한다.
+		//아래 소스는 글 등록 처리 후 "getUserList.do"로 리다이렉트 되어 최종 url은 다음과 같다.
+		// =>http://localhost:8090/BoardWeb/getBoardList.do
+		//return "redirect:getBoardList.do";
+		
+		
 		// 1. 사용자 입력 정보 추출
 		
 		//String title = request.getParameter("title");
@@ -44,8 +57,7 @@ public class InsertBoardController  { // implements Controller
 		//vo.setWriter(writer);
 		//vo.setContent(content);
 		
-		BoardDAO boardDAO = new BoardDAO();
-		boardDAO.insertBoard(vo);
+		//BoardDAO boardDAO = new BoardDAO();
 		//매개변수로 BoardVO vo를 바로 받을경우, insertBoard()실행시 command 객체가 자동으로 추출, 연동까지 setting함
 		
 		/* 서블릿 컨테이너는 클라이언트의 http요청이 서버에 전달되는 순간,
@@ -65,6 +77,6 @@ public class InsertBoardController  { // implements Controller
 		
 		//등록한 글을 포함하여 재검색 후 BoadList를 출력 해야 하므로 .do	
 		//return "getBoardList.do";
-	}
+	//}
 
-}
+//}

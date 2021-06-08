@@ -1,4 +1,4 @@
-package com.springbook.view.board;
+/*package com.springbook.view.board;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,13 +6,25 @@ import javax.servlet.http.HttpSession;
 
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.impl.BoardDAO;
-import org.springframework.web.servlet.mvc.Controller;
+//import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Controller;
 
-public class GetBoardController implements Controller {
+@Controller
+public class GetBoardController { //implements Controller 
 
-	@Override
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	//annotation ver.
+	@RequestMapping("/getBoard.do")
+	public ModelAndView getBoard(BoardVO vo, BoardDAO boardDAO, ModelAndView mav) {
+		mav.addObject("board", boardDAO.getBoard(vo)); //Model 정보 저장
+		mav.setViewName("getBoard.jsp"); //view 정보 저장
+		
+		return mav;
+	}
+	
+	
+	/*public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		
 		//이제 부터 Session이 아닌 Httprequest 로 부터 정보를 가져올 수 있다.
 		
@@ -39,10 +51,9 @@ public class GetBoardController implements Controller {
 
 		return mav;
 		
-		/* Session은 요청할때마다 하나씩 새로 생성된다. 이에 서버에 과부하가 올 수 있으므로 권장하지 XXX
+		 Session은 요청할때마다 하나씩 새로 생성된다. 이에 서버에 과부하가 올 수 있으므로 권장하지 XXX
 		 * HttpSession session = request.getSession(); session.setAttribute("board",
 		 * board); return "getBoard";
-		 */
-	}
-
-}
+		 
+	}*/
+//}
