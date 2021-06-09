@@ -33,6 +33,10 @@ public class LoginController  { //implements Controller
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String login(UserVO vo, UserDAO userDAO, HttpSession session) {
 		
+		//예외처리 1)
+		if(vo.getId() == null || vo.getId().equals("")) {
+			throw new IllegalArgumentException("아이디는 반드시 입력해야합니다.");
+		}
 		UserVO user = userDAO.getUser(vo);
 		
 		System.out.println("로그인 처리");
