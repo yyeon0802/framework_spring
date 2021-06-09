@@ -13,9 +13,15 @@ import com.springbook.biz.board.BoardVO;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {      //상속받은 인터페이스로 메소드를 구현한다.
 
-   @Autowired
-   private BoardDAOSpring boardDAO;
-//   private BoardDAO boardDAO;
+	/* Controller 에서 직접 DAO를 호출하기에는 유지보수에 어려움이 있다. 따라서
+       boardService에서 따로 DAO를 호출하고 Autowired를 이용해 Controller에 사용한다.  
+ 
+	 *   80%의 프로젝트는 AOP를 Service impl에서 구동한다. => 이를 통해 Controller에서 AOP적용한다.
+	 */
+	
+	@Autowired
+   private BoardDAO boardDAO;
+//   private BoardDAOSpring boardDAO;
 //   private Log4jAdvice log;
    
    //LogAdvice log 사용을 위한 생성자

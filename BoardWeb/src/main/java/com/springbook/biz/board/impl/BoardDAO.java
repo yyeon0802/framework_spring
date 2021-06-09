@@ -13,8 +13,7 @@ import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.common.JDBCUtil;
 
 //DAO(Data Access Object)
-//BoardDAOSpring(spring Template) 사용하려면 중복을 없애야한다.
-//@Repository("boardDAO") //Repository : component보다 데이터처리에 효율적(why? 예외처리포함)
+@Repository("boardDAO") //Repository : component보다 데이터처리에 효율적(why? 예외처리포함) // BoardDAOSpring사용을 위한 annotation 주석
 public class BoardDAO {
 
 	//JDBC 변수
@@ -24,10 +23,12 @@ public class BoardDAO {
 	
 	//SQL명령어(final로 확정한다.)
 	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values((select nvl(max(seq),0)+1 from board), ?, ?, ?)";
-	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
+	private final String BOARD_UPDATE = "update board set title=?, content=?, writer=? where seq=?";
 	private final String BOARD_DELETE = "delete board where seq=?";
 	private final String BOARD_GET = "select * from board where seq=?";
 	private final String BOARD_LIST = "select * from board order by seq desc";
+	private final String BOARD_LIST_T = "select * from board where title like '%' || ? || '%' order by seq desc";
+	private final String BOARD_LIST_C = "select * from board where content like '%' || ? || '%' order by seq desc";
 	
 	//CRUD 기능의 메소드 구현
 	//글 등록
@@ -58,7 +59,8 @@ public class BoardDAO {
 				stmt = conn.prepareStatement(BOARD_UPDATE);
 				stmt.setString(1, vo.getTitle());
 				stmt.setString(2, vo.getContent());
-				stmt.setInt(3, vo.getSeq());
+				stmt.setString(3, vo.getWriter());
+				stmt.setInt(4, vo.getSeq());
 				stmt.executeUpdate();
 				
 			} catch (Exception e) {
@@ -122,7 +124,15 @@ public class BoardDAO {
 			
 			try {
 				conn = JDBCUtil.getConnection();
-				stmt = conn.prepareStatement(BOARD_LIST);
+				
+				if(vo.getSearchCondition().equals("TITLE")) {
+					stmt = conn.prepareStatement(BOARD_LIST_T);					
+				} else if(vo.getSearchCondition().equals("CONTENT")) {
+					stmt = conn.prepareStatement(BOARD_LIST_C);
+				}
+				
+				//stmt = conn.prepareStatement(BOARD_LIST);
+				stmt.setString(1, vo.getSearchKeyword());
 				rs = stmt.executeQuery();
 
 				while(rs.next()) {
