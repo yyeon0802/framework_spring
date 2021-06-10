@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class BoardListVO {
 	
-	@XmlElement(name = "board") // name 미 설정시, 
+	@XmlElement(name = "board") // name 미 설정시, boardList
 	private List<BoardVO> boardList;
 	
 	public List<BoardVO> getBoardList(){
