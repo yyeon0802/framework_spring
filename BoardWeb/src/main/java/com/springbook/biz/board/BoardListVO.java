@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class BoardListVO {
 	
-	@XmlElement(name = "board") // name ¹Ì ¼³Á¤½Ã, boardList
+	@XmlElement(name = "board") // name ë¯¸ ì„¤ì •ì‹œ, boardList
 	private List<BoardVO> boardList;
 	
 	public List<BoardVO> getBoardList(){

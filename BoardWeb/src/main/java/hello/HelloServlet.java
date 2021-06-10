@@ -16,14 +16,14 @@ public class HelloServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public HelloServlet() {
-       System.out.println("===> HelloServlet °´Ã¼ »ı¼º");
+       System.out.println("===> HelloServlet ê°ì²´ ìƒì„±");
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet() ¸Ş¼Òµå È£Ãâ");
+		System.out.println("doGet() ë©”ì†Œë“œ í˜¸ì¶œ");
 	}	
 
 }
