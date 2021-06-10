@@ -20,7 +20,8 @@ public class BoardServiceImpl implements BoardService {      //상속받은 인터페이
 	 */
 	
 	@Autowired
-   private BoardDAO boardDAO;
+	private BoardDAOMybatis boardDAO;
+//   private BoardDAO boardDAO;
 //   private BoardDAOSpring boardDAO;
 //   private Log4jAdvice log;
    

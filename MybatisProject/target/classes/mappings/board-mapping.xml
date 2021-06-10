@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+	<!-- <![CDATA[ <= 와 같은 부등호를 인식하게 한다. ]]> -->
+	
+	<insert id="insertBoard">  <!-- parameterType="board" 필수값은 아니어서 생략시 vo타입으로 받게됨  -->
+		<!-- <selectKey keyProperty="seq" resultType="int">
+			select board_seq.nextval as seq from dual
+		</selectKey> -->
+		<!-- values(#{seq}, --> 
+		<![CDATA[
+			INSERT INTO BOARD(SEQ, TITLE, WRITER, content)
+			VALUES((SELECT NVL(MAX(SEQ), 0)+1 FROM BOARD), #{title}, #{writer},	#{content})
+		]]>
+	</insert>
+
+	<update id="updateBoard">
+	<![CDATA[
+		UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content} WHERE SEQ=#{seq}
+	]]>
+	</update>
+
+	<delete id="deleteBoard">
+	<![CDATA[
+		DELETE BOARD WHERE SET=#{seq}
+	]]>
+	</delete>
+
+	<select id="getBoard" resultType="board">
+	<![CDATA[
+		SELECT * FROM BAORD WHERE SEQ=#{seq}
+	]]>
+	</select>
+
+	<select id="getBoardList" resultType="board">
+	<![CDATA[
+		SELECT * FROM BOARD
+		WHERE TITLE LIKE '%' || #{searchKeyword} || '%'
+		ORDER BY SEQ DESC
+	]]>
+	</select>
+</mapper>

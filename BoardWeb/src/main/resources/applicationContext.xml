@@ -51,6 +51,22 @@
       <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
    </aop:config>
    
+   <!--  myBatis SessionFactory 설정  -->
+   <!-- <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="configLocation" value="classpath:sql-map-config.xml"/>
+      <property name="dataSource" ref="dataSource"/>
+   </bean> -->
+   
+   
+   <!--  SQL Session  -->
+   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="configLocation" value="classpath:sql-map-config.xml"/>
+      <property name="dataSource" ref="dataSource"/>
+   </bean>
+   
+   <bean class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg ref="sqlSession"></constructor-arg>
+   </bean>
    
    <!-- Template 설정 2)bean사용 의존성 주입 방법 & Autowired -->
    <!-- Spring JDBC설정 -->
