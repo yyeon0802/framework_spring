@@ -7,9 +7,9 @@ import java.util.Properties;
 
 public class CollectionBean {
 
-	// List -> Set º¯°æ
-	// Set -> Map º¯°æ
-	// Map -> Properties º¯°æ
+	// List -> Set ë³€ê²½
+	// Set -> Map ë³€ê²½
+	// Map -> Properties ë³€ê²½
 	
 	private Properties addressList;
 
